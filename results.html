@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skill-Based Recommendations</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f8fafc;
+        margin: 0;
+        padding: 0;
+        color: #222;
+      }
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #0066cc;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #004aad;
+        border-left: 5px solid #0066cc;
+        padding-left: 10px;
+        margin-top: 30px;
+      }
+      .card {
+        background: #f0f6ff;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        transition: all 0.2s ease;
+      }
+      .card:hover {
+        background: #e5f1ff;
+        transform: translateY(-3px);
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .back {
+        text-align: center;
+        margin-top: 30px;
+      }
+      .icon {
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔍 Recommendations for "{{ skill }}"</h1>
+
+      <h2>💼 Skill–Career Mapping</h2>
+      {% if skills %} {% for s in skills %}
+      <div class="card">
+        <b>{{ s["Skill"] }}</b> — {{ s["Skill Category"] }}<br />
+        <i>Career(s):</i> {{ s["Career(s)"] }}<br />
+        <i>Use:</i> {{ s["Description / Use in Career"] }}
+      </div>
+      {% endfor %} {% else %}
+      <p>No skill–career mappings found.</p>
+      {% endif %}
+
+      <h2>🧑‍💻 Recommended Courses</h2>
+      {% if courses %} {% for c in courses %}
+      <div class="card">
+        <b>{{ c["course_title"] }}</b>
+        {% if c["url"] %} —
+        <a href="{{ c['url'] }}" target="_blank">View Course</a>
+        {% endif %}
+      </div>
+      {% endfor %} {% else %}
+      <p>No courses found.</p>
+      {% endif %}
+
+      <h2>📚 Recommended Books</h2>
+      {% if books %} {% for b in books %}
+      <div class="card">
+        <b>{{ b[b.keys()|list|first] }}</b>
+        {% if b["author"] %}<br /><i>By {{ b["author"] }}</i>{% endif %}
+      </div>
+      {% endfor %} {% else %}
+      <p>No books found.</p>
+      {% endif %}
+
+      <h2>🎥 Recommended YouTube Videos</h2>
+      {% if youtube %} {% for y in youtube %}
+      <div class="card">
+        <b>{{ y[y.keys()|list|first] }}</b><br />
+        <i>{{ y["Channel Name"] }}</i><br />
+        {% if y["youtube_video_link"] %} [<a
+          href="{{ y['youtube_video_link'] }}"
+          target="_blank"
+          >Watch</a
+        >] {% endif %}
+      </div>
+      {% endfor %} {% else %}
+      <p>No YouTube videos found.</p>
+      {% endif %}
+
+      <div class="back"><a href="/">← Back to Home</a></div>
+    </div>
+  </body>
+</html>

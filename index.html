@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Skill Recommender</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>AI-Powered Learning Recommender</h1>
+      <form action="/recommend" method="POST">
+        <input
+          type="text"
+          name="skill"
+          placeholder="Enter a skill (e.g., Python, Data Science)"
+          required
+        />
+        <button type="submit">Get Recommendations</button>
+      </form>
+    </div>
+  </body>
+</html>
